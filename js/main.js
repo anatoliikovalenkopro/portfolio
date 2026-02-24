@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+ 
   const yearElement = document.getElementById("year");
   if (yearElement) yearElement.textContent = new Date().getFullYear();
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
+ 
   const themeToggle = document.getElementById("themeToggle");
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") document.body.classList.add("dark");
@@ -52,10 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
     themeToggle.setAttribute("aria-label", isDark ? "Toggle light mode" : "Toggle dark mode");
   }
 
-
+ 
   const form = document.getElementById("contactForm");
-  const successMsg = document.getElementById("successMsg");
+  if (!form) return;
 
+  const successMsg = document.getElementById("successMsg");
   const nameInput = document.getElementById("name");
   const emailInput = document.getElementById("email");
   const messageInput = document.getElementById("message");
@@ -64,61 +65,66 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailError = document.getElementById("emailError");
   const messageError = document.getElementById("messageError");
 
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      
-      if (successMsg) successMsg.textContent = "";
+  
+  if (!nameInput || !emailInput || !messageInput || !nameError || !emailError || !messageError) return;
 
-      const nameVal = nameInput.value.trim();
-      const emailVal = emailInput.value.trim();
-      const msgVal = messageInput.value.trim();
+  const submitBtn = form.querySelector('button[type="submit"]');
 
-      let ok = true;
+  form.addEventListener("submit", (e) => {
+    if (successMsg) successMsg.textContent = "";
 
-      
-      if (nameVal.length < 2) {
-        nameError.textContent = "Please enter your name (at least 2 characters).";
-        ok = false;
-      } else {
-        nameError.textContent = "";
-      }
+    const nameVal = nameInput.value.trim();
+    const emailVal = emailInput.value.trim();
+    const msgVal = messageInput.value.trim();
 
-      
-      if (!isValidEmail(emailVal)) {
-        emailError.textContent = "Please enter a valid email address.";
-        ok = false;
-      } else {
-        emailError.textContent = "";
-      }
+    let ok = true;
 
-     
-      if (msgVal.length < 10) {
-        messageError.textContent = "Message should be at least 10 characters.";
-        ok = false;
-      } else {
-        messageError.textContent = "";
-      }
-
-      
-      if (!ok) {
-        e.preventDefault();
-        return;
-      }
-
-      
-      if (successMsg) successMsg.textContent = "Sending…";
-    });
+   
+    if (nameVal.length < 2) {
+      nameError.textContent = "Please enter your name (at least 2 characters).";
+      ok = false;
+    } else {
+      nameError.textContent = "";
+    }
 
     
-    [nameInput, emailInput, messageInput].forEach((el) => {
-      el.addEventListener("input", () => {
-        if (el === nameInput) nameError.textContent = "";
-        if (el === emailInput) emailError.textContent = "";
-        if (el === messageInput) messageError.textContent = "";
-        if (successMsg) successMsg.textContent = "";
-      });
+    if (!isValidEmail(emailVal)) {
+      emailError.textContent = "Please enter a valid email address.";
+      ok = false;
+    } else {
+      emailError.textContent = "";
+    }
+
+    
+    if (msgVal.length < 10) {
+      messageError.textContent = "Message should be at least 10 characters.";
+      ok = false;
+    } else {
+      messageError.textContent = "";
+    }
+
+
+    if (!ok) {
+      e.preventDefault();
+      if (submitBtn) submitBtn.disabled = false;
+      return;
+    }
+
+ 
+    if (submitBtn) submitBtn.disabled = true;
+    if (successMsg) successMsg.textContent = "Sending…";
+  });
+
+  
+  [nameInput, emailInput, messageInput].forEach((el) => {
+    el.addEventListener("input", () => {
+      if (el === nameInput) nameError.textContent = "";
+      if (el === emailInput) emailError.textContent = "";
+      if (el === messageInput) messageError.textContent = "";
+      if (successMsg) successMsg.textContent = "";
+      if (submitBtn) submitBtn.disabled = false;
     });
-  }
+  });
 
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
