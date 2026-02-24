@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anatolii Kovalenko | Front-End Developer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/certificates.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="logo" href="#">AK</a>
+
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle dark mode">🌙</button>
+        <button id="menuToggle" class="icon-btn" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">☰</button>
+      </div>
+
+      <nav id="navMenu" class="nav-wrap" aria-label="Primary">
+        <ul class="nav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#certificates">Certificates</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Hi, I’m Anatolii.</h1>
+        <p>I build responsive, user-friendly web interfaces with HTML, CSS, and JavaScript.</p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="btn btn-secondary" href="#contact">Contact</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About</h2>
+        <p>
+          Software Development student at NAIT. Background in operations and quality assurance.
+          I enjoy building clean UI and improving user experience through structured, accessible code.
+        </p>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Projects</h2>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Portfolio Website</h3>
+            <p>Responsive multi-section site with dark mode, mobile menu, and form validation.</p>
+            <div class="links">
+              <a href="#" target="_blank" rel="noreferrer">Live</a>
+              <a href="#" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </article>
+
+          <!-- <article class="card">
+            <h3>Task Manager App</h3>
+            <p>To-do app with DOM manipulation, events, filters, and localStorage.</p>
+            <div class="links">
+              <a href="#" target="_blank" rel="noreferrer">Live</a>
+              <a href="#" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </article> -->
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <h2>Skills</h2>
+        <ul class="chips">
+          <li>HTML5</li><li>CSS3</li><li>Flexbox</li><li>Responsive Design</li>
+          <li>JavaScript</li><li>Git</li><li>GitHub</li><li>Chrome DevTools</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="certificates" class="section">
+      <div class="container">
+        <h2>Certificates</h2>
+        <p class="muted">Courses and certifications related to software development and data.</p>
+
+        <div class="cert-controls">
+          <input id="certSearch" class="cert-search" type="text"
+            placeholder="Search certificates (e.g., SQL, JavaScript, Google)..." />
+          <button id="certToggle" class="btn btn-secondary" type="button">Show all</button>
+        </div>
+
+        <div id="certGrid" class="grid cert-grid"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Contact</h2>
+
+        
+        <form id="contactForm"
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              class="form"
+              novalidate>
+
+          
+          <input type="hidden" name="form-name" value="contact" />
+
+         
+          <p class="hidden">
+            <label>Don’t fill this out: <input name="bot-field" /></label>
+          </p>
+
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required minlength="2" />
+            <small class="error" id="nameError"></small>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+            <small class="error" id="emailError"></small>
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required minlength="10"></textarea>
+            <small class="error" id="messageError"></small>
+          </div>
+
+          <button class="btn" type="submit">Send</button>
+          <p class="success" id="successMsg" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="contact-links">
+          <a href="mailto:koovallpro@gmail.com">koovallpro@gmail.com</a> •
+          <a href="https://linkedin.com/in/anatolii-kovalenko-32b2362a2" target="_blank" rel="noreferrer">LinkedIn</a> •
+          <a href="https://github.com/anatoliikovalenkopro" target="_blank" rel="noreferrer">GitHub</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> Anatolii Kovalenko</small>
+    </div>
+  </footer>
+</body>
+</html>
